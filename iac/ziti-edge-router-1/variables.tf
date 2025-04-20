@@ -3,9 +3,9 @@ variable "CLOUDFLARE_API_TOKEN" {
   type        = string
 }
 
-variable "AWS_DEFAULT_REGION" {
+variable "aws_region" {
   type    = string
-  default = "us-east-1"
+  default = "us-west-1"
 }
 
 variable "AWS_ACCESS_KEY_ID" {
@@ -18,7 +18,7 @@ variable "AWS_SECRET_ACCESS_KEY" {
 
 variable "aws_region_key" {
   type    = string
-  default = "us-east-1-2023"
+  default = "us-west-1-2023"
 }
 
 variable "cloudflare_zone_id" {

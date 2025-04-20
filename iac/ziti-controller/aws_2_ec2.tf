@@ -1,5 +1,5 @@
 resource "aws_security_group" "allow_all_traffic" {
-  provider      = aws.aws_us_east_1
+  provider      = aws.aws_provider
   name          = "ec_sg"
   description   = "Allow all inbound and outbound traffic"
   vpc_id        = aws_vpc.qytang_vpc.id
@@ -29,13 +29,13 @@ resource "aws_security_group" "allow_all_traffic" {
 
 # 可以从参数存储中获取Amazon Linux 2 的最新 AMI ID
 data aws_ssm_parameter amzn2_ami {
-  provider      = aws.aws_us_east_1
+  provider      = aws.aws_provider
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
 # 获取Amazon Linux 2023 AMI ID
 data "aws_ami" "amazonlinux_2023" {
-  provider      = aws.aws_us_east_1
+  provider      = aws.aws_provider
   most_recent   = true
   owners        = [ "amazon" ]
   filter {
@@ -50,7 +50,7 @@ data "aws_ami" "amazonlinux_2023" {
 
 
 resource "aws_instance" "ziti-controller" {
-  provider              = aws.aws_us_east_1
+  provider              = aws.aws_provider
   key_name              = var.aws_region_key
   ami                   = data.aws_ami.amazonlinux_2023.id
   instance_type         = "t2.medium"
@@ -66,10 +66,12 @@ resource "aws_instance" "ziti-controller" {
 
 # 关联一个 Elastic IP 到上面的 EC2 实例
 resource "aws_eip" "ziti_controller_eip" {
-  provider = aws.aws_us_east_1
+  provider = aws.aws_provider
   instance = aws_instance.ziti-controller.id
   domain   = "vpc"
   tags = {
     Name = "ziti controller EIP"
   }
 }
+
+
