@@ -1,0 +1,20 @@
+# 忽略在任何目录下 Terraform 产生的文件
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/*.tfvars
+**/*.tfvars.json
+**/*.tfplan
+**/*.tfplan.*
+**/.terraform.lock.hcl
+**/override.tf
+**/override.tf.json
+**/crash.log
+
+# 忽略在任何目录下 Python 临时文件
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/*.pyo
+**/*.pyd
+
